@@ -100,6 +100,22 @@ tdado removeTail(tlista *l){
 	return removido;    
 }// fim 
 //------------------------------
+int encontrar (tlista l, tdado dado) {
+	int pos = 0;
+	while(l.head != NULL) {
+		for(l.head;l.tail;l.head = l.head->prox){
+		if(l.head->dado == dado){
+			pos++;
+			return pos;
+		}
+		else{
+			pos++;
+		}
+	}
+	return -1;
+}
+}
+//------------------------------
 tdado removeLista(tlista *l, tdado v){
 	tno *aux; 
 	tdado retorno;
@@ -111,7 +127,11 @@ tdado removeLista(tlista *l, tdado v){
 		aux=l->head;
 		while(aux!=NULL){
 			if(v == aux->dado){
-				//??
+				retorno = aux->dado;
+				//arrumar os ponteiros
+				
+				free(aux);
+				return retorno;
 			}// fim if
 			aux=aux->prox;
 		}// fim while      
@@ -144,6 +164,7 @@ printf("3-Insert Tail\n");
 printf("4-Remove Head\n");
 printf("5-Remove Tail\n");
 printf("6- Remove\n");
+printf("7- Encontrar\n");
 printf("0-Sair\n");
 scanf("%d",&op);
 return op;
@@ -177,7 +198,13 @@ int main(){
 			        // testar se existe
 				    printf("Valor %d removido\n", removeLista(&l,v));
 			        }
-			break;           
+			break;  
+			case 7: if(!isEmpty(&l)) {
+				    printf("Entre com um valor para encontrar:");
+				    scanf("%d",&v);
+				    printf("%d",encontrar(l,v));
+			break;
+			}         
 			case 0: printf("Saindo ...\n");
 			break;
 			default: printf("Opcao invalida\n");
